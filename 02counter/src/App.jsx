@@ -3,32 +3,38 @@ import './App.css'
 
 function App() {
 
-  const [counter,setCounter] = useState(10);
+  // let counter = 15
+
+  let [ counter, setCounter ] = useState(15)
 
   const addValue = () => {
-    if(counter < 20){
-      setCounter(counter + 1)
+    if(counter >= 20){
+      setCounter("Limit Exceed");
+    }else{
+      counter = counter + 1;
+      setCounter(counter);
     }
   }
 
-  const removeValue = () => {
-    if(counter <= 0){
-      
+  const decreaseValue = () => {
+    if(counter <= 15){
+      setCounter("Not Authorized");
     }else{
-      setCounter(counter - 1)
+      counter = counter-1;
+      setCounter(counter)
     }
   }
 
 
   return (
-    <>
-     <h1>Aman Sinha</h1>
-     <h2>Counter Value : {counter}</h2>
+   <>
+   <h1>Chai aur React</h1>
+   <h2>Counter Value : {counter}</h2>
 
-     <button onClick={addValue}>Add Value </button>
-     <br />
-     <button onClick={removeValue}>Remove Value</button>
-    </>
+   <button onClick={addValue}>Add Value</button>
+   <br />
+   <button onClick={decreaseValue}>Decrease Value</button>
+   </>
   )
 }
 
