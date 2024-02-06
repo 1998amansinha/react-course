@@ -1,12 +1,24 @@
-const configuration = {
+const Configuration = {
 
-    // Converting Id into String
-    appwriteUrl : String(import.meta.env.VITE_APPWRITE_URL),                                // MegaProject
-    appwriteProjectId : String(import.meta.env.VITE_APPWRITE_PROJECT_ID),                   // MegaProject
-    appwriteDatabaseId : String(import.meta.env.VITE_APPWRITE_DATABASE_ID),                 // Blog
-    appwriteCollectionId : String(import.meta.env.VITE_APPWRITE_COLLECTION_ID),             // Articles
-    appwriteBucketId : String(import.meta.env.VITE_APPWRITE_BUCKET_ID)                      // images
+    // Appwrite base URL
+    // The URL where your Appwrite backend is hosted
+    appwriteUrl: String(import.meta.env.VITE_APPWRITE_URL),
 
-}
+    // Appwrite Project ID
+    // The unique identifier for your Appwrite project
+    appwriteProjectId: String(import.meta.env.VITE_APPWRITE_PROJECT_ID),
 
-export default configuration ;
+    // Appwrite Database ID
+    // The ID of the database within your Appwrite project
+    appwriteDatabaseId: String(import.meta.env.VITE_APPWRITE_DATABASE_ID),
+
+    // Appwrite Collection ID
+    // The ID of the collection within your Appwrite database where articles are stored
+    appwriteCollectionId: String(import.meta.env.VITE_APPWRITE_COLLECTION_ID),
+
+    // Appwrite Bucket ID
+    // The ID of the storage bucket within Appwrite where images are stored
+    appwriteBucketId: String(import.meta.env.VITE_APPWRITE_BUCKET_ID)
+};
+
+export default Configuration
