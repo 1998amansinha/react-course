@@ -19,7 +19,7 @@ export class AuthService {
     }
 
     // For Creating Account
-    async signUp ({email, password, name}) {
+    async createAccount ({email, password, name}) {
         try {
             const userAccount = await this.account(ID.unique(), email, password, name) // Account Creation
             if(userAccount){ // If account is created directly login of user .
