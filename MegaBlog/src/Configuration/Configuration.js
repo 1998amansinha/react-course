@@ -1,4 +1,4 @@
-const Configuration = {
+const conf = {
 
     // Appwrite base URL
     // The URL where your Appwrite backend is hosted
@@ -21,4 +21,4 @@ const Configuration = {
     appwriteBucketId: String(import.meta.env.VITE_APPWRITE_BUCKET_ID)
 };
 
-export default Configuration
+export default conf

@@ -1,17 +1,16 @@
-import React from "react";
-import { UseSelector, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { RTE, Button, Input, Select } from "../index";
+import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { useCallback } from "react";
+import { Button, Input, RTE, Select } from "..";
 import appwriteService from "../../appwrite/config";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const postForm = ({ post }) => {
+export default function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
       defaultValues: {
         title: post?.title || "",
-        slug: post?.slug || "",
+        slug: post?.$id || "",
         content: post?.content || "",
         status: post?.status || "active",
       },
@@ -25,41 +24,46 @@ const postForm = ({ post }) => {
       const file = data.image[0]
         ? await appwriteService.uploadFile(data.image[0])
         : null;
+
       if (file) {
         appwriteService.deleteFile(post.featuredImage);
       }
+
       const dbPost = await appwriteService.updatePost(post.$id, {
-        ...userData,
+        ...data,
         featuredImage: file ? file.$id : undefined,
       });
+
       if (dbPost) {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
       const file = await appwriteService.uploadFile(data.image[0]);
+
       if (file) {
-        const fieldId = file.$id;
-        data.featuredImage = fieldId;
+        const fileId = file.$id;
+        data.featuredImage = fileId;
         const dbPost = await appwriteService.createPost({
           ...data,
           userId: userData.$id,
         });
+
         if (dbPost) {
-          navigate(`/post/{dbPost.$id}`);
+          navigate(`/post/${dbPost.$id}`);
         }
       }
     }
   };
 
   const slugTransform = useCallback((value) => {
-    if (value && typeof value === "string") {
+    if (value && typeof value === "string")
       return value
         .trim()
         .toLowerCase()
         .replace(/[^a-zA-Z\d\s]+/g, "-")
         .replace(/\s/g, "-");
-      return "";
-    }
+
+    return "";
   }, []);
 
   React.useEffect(() => {
@@ -132,4 +136,4 @@ const postForm = ({ post }) => {
       </div>
     </form>
   );
-};
+}

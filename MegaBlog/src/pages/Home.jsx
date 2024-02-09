@@ -1,13 +1,12 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import appwriteService from "../appwrite/config";
 import { Container, PostCard } from "../components";
 
-const Home = () => {
+function Home() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    appwriteService.getPosts([]).then((posts) => {
+    appwriteService.getPosts().then((posts) => {
       if (posts) {
         setPosts(posts.documents);
       }
@@ -42,8 +41,6 @@ const Home = () => {
       </Container>
     </div>
   );
-
-  return <div>Home</div>;
-};
+}
 
 export default Home;
